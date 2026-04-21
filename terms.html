@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务条款 | Terms of Service - 股智 StockPulse AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0e17;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(16,185,129,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #10b981; text-decoration: none; }
+        .logo span { color: #e0e0e0; }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-links a { color: #9ca3af; text-decoration: none; margin-left: 20px; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: #10b981; }
+
+        .lang-switcher { display: flex; gap: 5px; }
+        .ls-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #9ca3af; padding: 5px 9px; border-radius: 6px;
+            cursor: pointer; font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+        }
+        .ls-btn.active { background: #10b981; color: #fff; border-color: #10b981; }
+        .ls-btn:hover:not(.active) { border-color: rgba(16,185,129,0.4); color: #10b981; }
+
+        h1 { font-size: 2rem; color: #fff; text-align: center; padding: 40px 0 10px; }
+        .last-updated { text-align: center; color: #6b7280; font-size: 0.85rem; margin-bottom: 40px; }
+
+        .section { margin-bottom: 32px; }
+        .section h2 { color: #10b981; font-size: 1.2rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(16,185,129,0.15); }
+        .section p, .section li { color: #d1d5db; font-size: 0.95rem; line-height: 1.7; margin-bottom: 10px; }
+        .section ul { padding-left: 20px; }
+        .section li { margin-bottom: 6px; }
+
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+
+        footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 30px 0; text-align: center; margin-top: 40px; }
+        footer a { color: #9ca3af; text-decoration: none; margin: 0 12px; font-size: 0.85rem; }
+        footer a:hover { color: #10b981; }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 1.6rem; }
+            .nav-right { gap: 10px; }
+            .ls-btn { padding: 4px 7px; font-size: 0.72rem; }
+            .nav-links a { margin-left: 12px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">股智 <span>StockPulse AI</span></a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="index.html" data-i18n="nav_home">首页</a>
+                    <a href="support.html" data-i18n="nav_support">支持</a>
+                </div>
+                <div class="lang-switcher">
+                    <button class="ls-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+                    <button class="ls-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="ls-btn" data-lang="es" onclick="setLang('es')">ES</button>
+                    <button class="ls-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+                </div>
+            </div>
+        </nav>
+
+        <h1 data-i18n="page_title">服务条款</h1>
+        <p class="last-updated">最后更新 Last Updated: 2026-04-18</p>
+
+        <!-- Chinese -->
+        <div id="lang-zh" class="lang-content active">
+            <div class="section">
+                <h2>接受条款</h2>
+                <p>欢迎使用股智（StockPulse AI）。下载、安装或使用本应用即表示您同意遵守以下服务条款。如果您不同意这些条款，请勿使用本应用。</p>
+            </div>
+            <div class="section">
+                <h2>服务描述</h2>
+                <p>股智是一款AI驱动的股票分析工具，提供以下功能：</p>
+                <ul>
+                    <li>实时股票行情和历史数据查看</li>
+                    <li>AI智能分析和投资建议参考</li>
+                    <li>自选股追踪和价格提醒</li>
+                    <li>财务数据和新闻资讯聚合</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>免责声明</h2>
+                <p>本应用提供的所有信息和AI分析结果仅供参考，不构成投资建议。股市投资有风险，您应独立做出投资决策，并对自己的投资行为承担全部责任。我们不对任何因使用本应用信息而导致的投资损失承担责任。</p>
+            </div>
+            <div class="section">
+                <h2>订阅条款</h2>
+                <p>本应用提供免费版和付费订阅版：</p>
+                <ul>
+                    <li><strong>免费版：</strong>包含基础功能，有使用限制（最多5支自选股、每日3次AI分析、仅日内图表）</li>
+                    <li><strong>专业版：</strong>解锁无限自选股、无限AI分析、全时段图表、价格提醒等功能</li>
+                </ul>
+                <p>订阅通过Apple App Store处理。订阅将自动续费，除非在当前订阅周期结束前至少24小时取消。您可以在iOS设置中管理订阅。</p>
+            </div>
+            <div class="section">
+                <h2>用户行为规范</h2>
+                <p>使用本应用时，您同意：</p>
+                <ul>
+                    <li>不将本应用用于任何非法目的</li>
+                    <li>不尝试对本应用进行反向工程、破解或未授权访问</li>
+                    <li>不利用本应用进行内幕交易或市场操纵</li>
+                    <li>不滥用API接口或对服务进行恶意攻击</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>知识产权</h2>
+                <p>本应用及其内容（包括但不限于设计、代码、图标和文本）均受知识产权法保护。未经授权，不得复制、修改或分发本应用的任何部分。</p>
+            </div>
+            <div class="section">
+                <h2>责任限制</h2>
+                <p>在法律允许的最大范围内，我们对因使用或无法使用本应用而产生的任何直接、间接、附带、特殊或后果性损害不承担责任，包括但不限于利润损失、数据丢失或投资损失。</p>
+            </div>
+            <div class="section">
+                <h2>条款修改</h2>
+                <p>我们保留随时修改这些服务条款的权利。修改后的条款将在此页面发布。继续使用本应用即表示您接受修改后的条款。</p>
+            </div>
+            <div class="section">
+                <h2>联系我们</h2>
+                <p>如有任何问题，请联系：<a href="mailto:sunxuchen1991@gmail.com" style="color:#10b981;">sunxuchen1991@gmail.com</a></p>
+            </div>
+        </div>
+
+        <!-- English -->
+        <div id="lang-en" class="lang-content">
+            <div class="section">
+                <h2>Acceptance of Terms</h2>
+                <p>Welcome to StockPulse AI. By downloading, installing, or using this application, you agree to be bound by the following Terms of Service. If you do not agree to these terms, please do not use this application.</p>
+            </div>
+            <div class="section">
+                <h2>Service Description</h2>
+                <p>StockPulse AI is an AI-powered stock analysis tool that provides:</p>
+                <ul>
+                    <li>Real-time stock quotes and historical data viewing</li>
+                    <li>AI-powered analysis and investment reference information</li>
+                    <li>Watchlist tracking and price alerts</li>
+                    <li>Financial data and news aggregation</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Disclaimer</h2>
+                <p>All information and AI analysis results provided by this application are for reference only and do not constitute investment advice. Stock market investment carries risk. You should make investment decisions independently and bear full responsibility for your investment actions. We are not liable for any investment losses resulting from the use of information provided by this application.</p>
+            </div>
+            <div class="section">
+                <h2>Subscription Terms</h2>
+                <p>This application offers a free tier and paid subscriptions:</p>
+                <ul>
+                    <li><strong>Free:</strong> Includes basic features with usage limits (up to 5 stocks, 3 AI analyses per day, intraday charts only)</li>
+                    <li><strong>Pro:</strong> Unlocks unlimited stocks, unlimited AI analysis, all chart periods, price alerts, and more</li>
+                </ul>
+                <p>Subscriptions are processed through the Apple App Store. Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current subscription period. You can manage subscriptions in your iOS Settings.</p>
+            </div>
+            <div class="section">
+                <h2>User Conduct</h2>
+                <p>When using this application, you agree to:</p>
+                <ul>
+                    <li>Not use this application for any illegal purpose</li>
+                    <li>Not attempt to reverse engineer, crack, or gain unauthorized access to the application</li>
+                    <li>Not use this application for insider trading or market manipulation</li>
+                    <li>Not abuse API interfaces or conduct malicious attacks on the service</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Intellectual Property</h2>
+                <p>This application and its content (including but not limited to design, code, icons, and text) are protected by intellectual property laws. No part of this application may be copied, modified, or distributed without authorization.</p>
+            </div>
+            <div class="section">
+                <h2>Limitation of Liability</h2>
+                <p>To the maximum extent permitted by law, we shall not be liable for any direct, indirect, incidental, special, or consequential damages arising from the use of or inability to use this application, including but not limited to loss of profits, loss of data, or investment losses.</p>
+            </div>
+            <div class="section">
+                <h2>Modification of Terms</h2>
+                <p>We reserve the right to modify these Terms of Service at any time. Modified terms will be posted on this page. Continued use of this application constitutes acceptance of the modified terms.</p>
+            </div>
+            <div class="section">
+                <h2>Contact Us</h2>
+                <p>For any questions, please contact: <a href="mailto:sunxuchen1991@gmail.com" style="color:#10b981;">sunxuchen1991@gmail.com</a></p>
+            </div>
+        </div>
+
+        <!-- Spanish -->
+        <div id="lang-es" class="lang-content">
+            <div class="section">
+                <h2>Aceptación de Términos</h2>
+                <p>Bienvenido a StockPulse AI. Al descargar, instalar o usar esta aplicación, aceptas quedar sujeto a los siguientes Términos de Servicio. Si no estás de acuerdo con estos términos, no uses esta aplicación.</p>
+            </div>
+            <div class="section">
+                <h2>Descripción del Servicio</h2>
+                <p>StockPulse AI es una herramienta de análisis bursátil impulsada por IA que proporciona:</p>
+                <ul>
+                    <li>Cotizaciones en tiempo real y visualización de datos históricos</li>
+                    <li>Análisis potenciado por IA e información de referencia para inversiones</li>
+                    <li>Seguimiento de lista de acciones y alertas de precio</li>
+                    <li>Datos financieros y agregación de noticias</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Aviso Legal</h2>
+                <p>Toda la información y los resultados del análisis IA proporcionados por esta aplicación son solo de referencia y no constituyen asesoramiento de inversión. La inversión bursátil conlleva riesgos. Debes tomar decisiones de inversión de forma independiente y asumir toda la responsabilidad de tus acciones. No somos responsables de ninguna pérdida de inversión derivada del uso de la información proporcionada por esta aplicación.</p>
+            </div>
+            <div class="section">
+                <h2>Términos de Suscripción</h2>
+                <p>Esta aplicación ofrece un nivel gratuito y suscripciones de pago:</p>
+                <ul>
+                    <li><strong>Gratis:</strong> Incluye funciones básicas con límites de uso (hasta 5 acciones, 3 análisis IA por día, solo gráficos intradía)</li>
+                    <li><strong>Pro:</strong> Desbloquea acciones ilimitadas, análisis IA ilimitado, todos los períodos gráficos, alertas de precio y más</li>
+                </ul>
+                <p>Las suscripciones se procesan a través de la App Store de Apple. Las suscripciones se renuevan automáticamente a menos que se cancelen al menos 24 horas antes del final del período actual. Puedes gestionar las suscripciones en los Ajustes de iOS.</p>
+            </div>
+            <div class="section">
+                <h2>Conducta del Usuario</h2>
+                <p>Al usar esta aplicación, aceptas:</p>
+                <ul>
+                    <li>No usar esta aplicación para ningún propósito ilegal</li>
+                    <li>No intentar realizar ingeniería inversa, descifrar u obtener acceso no autorizado a la aplicación</li>
+                    <li>No usar esta aplicación para operaciones con información privilegiada o manipulación del mercado</li>
+                    <li>No abusar de las interfaces API ni realizar ataques maliciosos al servicio</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Propiedad Intelectual</h2>
+                <p>Esta aplicación y su contenido (incluidos, entre otros, diseño, código, iconos y texto) están protegidos por las leyes de propiedad intelectual. Ninguna parte de esta aplicación puede ser copiada, modificada o distribuida sin autorización.</p>
+            </div>
+            <div class="section">
+                <h2>Limitación de Responsabilidad</h2>
+                <p>En la medida máxima permitida por la ley, no seremos responsables de ningún daño directo, indirecto, incidental, especial o consecuente derivado del uso o la imposibilidad de uso de esta aplicación, incluidas pérdidas de beneficios, pérdida de datos o pérdidas de inversión.</p>
+            </div>
+            <div class="section">
+                <h2>Modificación de Términos</h2>
+                <p>Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento. Los términos modificados se publicarán en esta página. El uso continuado de esta aplicación constituye la aceptación de los términos modificados.</p>
+            </div>
+            <div class="section">
+                <h2>Contáctanos</h2>
+                <p>Para cualquier pregunta, contáctanos en: <a href="mailto:sunxuchen1991@gmail.com" style="color:#10b981;">sunxuchen1991@gmail.com</a></p>
+            </div>
+        </div>
+
+        <!-- French -->
+        <div id="lang-fr" class="lang-content">
+            <div class="section">
+                <h2>Acceptation des Conditions</h2>
+                <p>Bienvenue sur StockPulse AI. En téléchargeant, installant ou utilisant cette application, vous acceptez d'être lié par les Conditions d'Utilisation suivantes. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser cette application.</p>
+            </div>
+            <div class="section">
+                <h2>Description du Service</h2>
+                <p>StockPulse AI est un outil d'analyse boursière propulsé par l'IA qui fournit :</p>
+                <ul>
+                    <li>Cotations en temps réel et visualisation des données historiques</li>
+                    <li>Analyse propulsée par l'IA et informations de référence pour les investissements</li>
+                    <li>Suivi de liste d'actions et alertes de prix</li>
+                    <li>Données financières et agrégation d'actualités</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Avertissement</h2>
+                <p>Toutes les informations et résultats d'analyse IA fournis par cette application sont uniquement à titre indicatif et ne constituent pas des conseils en investissement. L'investissement boursier comporte des risques. Vous devez prendre vos décisions d'investissement de manière indépendante et assumer l'entière responsabilité de vos actions. Nous ne sommes pas responsables des pertes d'investissement résultant de l'utilisation des informations fournies par cette application.</p>
+            </div>
+            <div class="section">
+                <h2>Conditions d'Abonnement</h2>
+                <p>Cette application propose un niveau gratuit et des abonnements payants :</p>
+                <ul>
+                    <li><strong>Gratuit :</strong> Comprend les fonctions de base avec des limites d'utilisation (jusqu'à 5 actions, 3 analyses IA par jour, graphiques intrajournaliers uniquement)</li>
+                    <li><strong>Pro :</strong> Débloque les actions illimitées, l'analyse IA illimitée, toutes les périodes graphiques, les alertes de prix et plus encore</li>
+                </ul>
+                <p>Les abonnements sont traités via l'App Store Apple. Les abonnements se renouvellent automatiquement sauf annulation au moins 24 heures avant la fin de la période en cours. Vous pouvez gérer les abonnements dans les Réglages iOS.</p>
+            </div>
+            <div class="section">
+                <h2>Conduite de l'Utilisateur</h2>
+                <p>En utilisant cette application, vous acceptez de :</p>
+                <ul>
+                    <li>Ne pas utiliser cette application à des fins illégales</li>
+                    <li>Ne pas tenter de désassembler, craquer ou obtenir un accès non autorisé à l'application</li>
+                    <li>Ne pas utiliser cette application pour des opérations d'initié ou la manipulation de marché</li>
+                    <li>Ne pas abuser des interfaces API ni mener des attaques malveillantes contre le service</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Propriété Intellectuelle</h2>
+                <p>Cette application et son contenu (incluant notamment la conception, le code, les icônes et le texte) sont protégés par les lois sur la propriété intellectuelle. Aucune partie de cette application ne peut être copiée, modifiée ou distribuée sans autorisation.</p>
+            </div>
+            <div class="section">
+                <h2>Limitation de Responsabilité</h2>
+                <p>Dans la limite maximale autorisée par la loi, nous ne serons pas responsables des dommages directs, indirects, accessoires, spéciaux ou consécutifs découlant de l'utilisation ou de l'impossibilité d'utiliser cette application, incluant les pertes de profits, pertes de données ou pertes d'investissement.</p>
+            </div>
+            <div class="section">
+                <h2>Modification des Conditions</h2>
+                <p>Nous nous réservons le droit de modifier ces Conditions d'Utilisation à tout moment. Les conditions modifiées seront publiées sur cette page. L'utilisation continue de cette application constitue l'acceptation des conditions modifiées.</p>
+            </div>
+            <div class="section">
+                <h2>Nous Contacter</h2>
+                <p>Pour toute question, veuillez nous contacter : <a href="mailto:sunxuchen1991@gmail.com" style="color:#10b981;">sunxuchen1991@gmail.com</a></p>
+            </div>
+        </div>
+
+        <footer>
+            <a href="index.html" data-i18n="foot_home">首页</a>
+            <a href="privacy.html" data-i18n="foot_privacy">隐私</a>
+            <a href="support.html" data-i18n="foot_support">支持</a>
+            <a href="mailto:sunxuchen1991@gmail.com" data-i18n="foot_contact">联系</a>
+        </footer>
+    </div>
+
+    <script>
+    var T = {
+        zh: { nav_home: "首页", nav_support: "支持", page_title: "服务条款", foot_home: "首页", foot_privacy: "隐私", foot_support: "支持", foot_contact: "联系" },
+        en: { nav_home: "Home", nav_support: "Support", page_title: "Terms of Service", foot_home: "Home", foot_privacy: "Privacy", foot_support: "Support", foot_contact: "Contact" },
+        es: { nav_home: "Inicio", nav_support: "Soporte", page_title: "Términos de Servicio", foot_home: "Inicio", foot_privacy: "Privacidad", foot_support: "Soporte", foot_contact: "Contacto" },
+        fr: { nav_home: "Accueil", nav_support: "Support", page_title: "Conditions d'Utilisation", foot_home: "Accueil", foot_privacy: "Confidentialité", foot_support: "Support", foot_contact: "Contact" }
+    };
+
+    function setLang(lang) {
+        localStorage.setItem('sa-lang', lang);
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.querySelectorAll('.lang-content').forEach(function(el) { el.classList.remove('active'); });
+        var target = document.getElementById('lang-' + lang);
+        if (target) target.classList.add('active');
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (T[lang] && T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+        });
+        document.querySelectorAll('.ls-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+    }
+
+    setLang(localStorage.getItem('sa-lang') || 'zh');
+    </script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股智 - AI股票分析 | StockPulse AI</title>
+    <meta name="description" content="股智 - 智能AI股票分析助手，实时行情、价格提醒、AI盈利分析，助您做出更明智的投资决策。支持中英法西四语言。">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0e17;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #10b981; }
+        .logo span { color: #e0e0e0; }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-links a {
+            color: #9ca3af; text-decoration: none; margin-left: 28px; font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #10b981; }
+
+        /* Language switcher */
+        .lang-switcher { display: flex; gap: 5px; }
+        .ls-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: #9ca3af; padding: 5px 9px; border-radius: 6px;
+            cursor: pointer; font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+        }
+        .ls-btn.active { background: #10b981; color: #fff; border-color: #10b981; }
+        .ls-btn:hover:not(.active) { border-color: rgba(16,185,129,0.4); color: #10b981; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 100px 0 60px;
+        }
+        .app-icon {
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 28px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 36px;
+            font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.2);
+        }
+        h1 {
+            font-size: 3.2rem; font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #10b981);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 1.25rem; color: #9ca3af; max-width: 560px; margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #10b981; color: #fff; padding: 16px 36px;
+            border-radius: 14px; text-decoration: none; font-size: 1.1rem; font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+        .download-btn:hover {
+            background: #059669; transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+        }
+        .download-btn svg { width: 22px; height: 22px; }
+
+        /* Section heading */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-heading h2 {
+            font-size: 2rem; font-weight: 700; color: #fff;
+            margin-bottom: 10px;
+        }
+        .section-heading p {
+            color: #9ca3af; font-size: 1rem;
+        }
+
+        /* Features */
+        .features-section { padding: 60px 0 20px; }
+        .features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px; padding: 0 0 80px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 32px;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(16, 185, 129, 0.2);
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            font-size: 2rem; margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            color: #fff; font-size: 1.15rem; margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #9ca3af; font-size: 0.92rem; line-height: 1.6;
+        }
+
+        /* Pro section */
+        .pro-section {
+            padding: 0 0 80px;
+        }
+        .pro-card {
+            background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(59,130,246,0.08));
+            border: 1px solid rgba(16,185,129,0.2);
+            border-radius: 20px;
+            padding: 48px 40px;
+            text-align: center;
+        }
+        .pro-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            color: #fff; font-size: 0.8rem; font-weight: 700;
+            padding: 4px 14px; border-radius: 20px;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .pro-card h2 {
+            font-size: 2rem; font-weight: 800; color: #fff;
+            margin-bottom: 12px;
+        }
+        .pro-card .pro-sub {
+            color: #9ca3af; font-size: 1rem; margin-bottom: 36px; line-height: 1.6;
+        }
+        .pro-features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 36px; text-align: left;
+        }
+        .pro-feature-item {
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .pro-check {
+            color: #10b981; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px;
+        }
+        .pro-feature-item span {
+            color: #d1d5db; font-size: 0.92rem; line-height: 1.5;
+        }
+        .trial-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16,185,129,0.12);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 10px;
+            padding: 10px 22px;
+            color: #10b981; font-size: 0.95rem; font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a {
+            color: #9ca3af; text-decoration: none; margin: 0 16px; font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #10b981; }
+        .footer-copy { color: #4b5563; font-size: 0.8rem; }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1.05rem; }
+            .hero { padding: 60px 0 40px; }
+            .features { grid-template-columns: 1fr; }
+            .nav-links a { margin-left: 14px; font-size: 0.8rem; }
+            .pro-card { padding: 32px 20px; }
+            .pro-features-grid { grid-template-columns: 1fr; }
+            .nav-right { gap: 10px; }
+            .ls-btn { padding: 4px 7px; font-size: 0.72rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="container">
+        <nav>
+            <div class="logo">股智 <span>StockPulse AI</span></div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="privacy.html" data-i18n="nav_privacy">隐私政策</a>
+                    <a href="support.html" data-i18n="nav_support">支持</a>
+                    <a href="terms.html" data-i18n="nav_terms">条款</a>
+                </div>
+                <div class="lang-switcher">
+                    <button class="ls-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+                    <button class="ls-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="ls-btn" data-lang="es" onclick="setLang('es')">ES</button>
+                    <button class="ls-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="app-icon">📈</div>
+            <h1 data-i18n="hero_title">股智 · AI 股票分析</h1>
+            <p class="subtitle" data-i18n="hero_sub">智能AI驱动的股票分析助手，实时行情、价格提醒、AI益利洞察，助您做出更明智的投资决策。</p>
+            <a href="#" class="download-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.99 2.97 12.5 4.7 9.56C5.55 8.1 7.13 7.18 8.82 7.16C10.09 7.14 11.29 8.03 12.07 8.03C12.85 8.03 14.29 6.96 15.82 7.13C16.47 7.16 18.25 7.4 19.4 9.03C19.3 9.09 17.19 10.33 17.21 12.85C17.24 15.87 19.89 16.87 19.92 16.88C19.89 16.96 19.49 18.34 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                <span data-i18n="hero_dl">App Store 下载</span>
+            </a>
+        </section>
+
+        <section class="features-section">
+            <div class="section-heading">
+                <h2 data-i18n="feat_title">核心功能</h2>
+                <p data-i18n="feat_sub">专为投资者打造的全功能股票分析工具</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3 data-i18n="f1_h">AI 每日市场简报</h3>
+                    <p data-i18n="f1_p">每日自动生成 AI 市场简报，总结大盘走势与个股亮点，打开 App 即可快速了解当日市场全貌。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-i18n="f2_h">AI 盈利深度分析</h3>
+                    <p data-i18n="f2_p">基于 GPT-4 对财报数据进行深度解读，从盈利质量、成长动能、运营效率、财务健康、估值合理性五大维度评分，并生成业绩概述、核心亮点、风险预警与投资建议。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 data-i18n="f3_h">实时行情追踪</h3>
+                    <p data-i18n="f3_p">全球股票实时行情，自选股列表配备迷你走势图与涨跌百分比，底部热门趋势板块（SPY、QQQ、NVDA 等）让您一眼掌握市场动态。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 data-i18n="f4_h">交互式图表</h3>
+                    <p data-i18n="f4_p">支持 1D、1W、1M、3M、6M、1Y 六档周期切换，配合关键财务数据（市盈率、市值、52周区间、股息率）全面掌握个股行情。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 data-i18n="f5_h">财报分析三合一</h3>
+                    <p data-i18n="f5_p">整合 Overview（EPS 历史、季度对比）、Key Metrics（P/E、P/B、ROE 等核心指标）、AI Summary（GPT-4 智能总结）三个标签页，一站式掌握财报全貌。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3 data-i18n="f6_h">价格提醒</h3>
+                    <p data-i18n="f6_p">设定目标价，App 在后台实时监控，价格触达时立即推送通知。支持高于/低于两种触发方向，Pro 专属功能。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📰</div>
+                    <h3 data-i18n="f7_h">实时新闻</h3>
+                    <p data-i18n="f7_p">每只个股自动聚合最新相关新闻，配备缩略图与摘要，第一时间了解影响股价的重要动态。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3 data-i18n="f8_h">定时市场通知</h3>
+                    <p data-i18n="f8_p">支持开市前 AI 晨报（9:30 AM）和收盘总结（4:00 PM）两档定时通知，在设置中一键开关，不错过任何重要时刻。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3 data-i18n="f9_h">数据导出</h3>
+                    <p data-i18n="f9_p">一键导出您的自选股数据，方便在其他工具中进一步分析或存档。Pro 专属功能。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 data-i18n="f10_h">四语言支持</h3>
+                    <p data-i18n="f10_p">完整支持中文、英语、法语、西班牙语，随时在设置中一键切换，所有界面文字即时生效。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3 data-i18n="f11_h">深色主题</h3>
+                    <p data-i18n="f11_p">全应用采用精心调校的深色界面，护眼舒适，图表与数据一目了然，专为长时间使用设计。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pro-section">
+            <div class="pro-card">
+                <div class="pro-badge" data-i18n="pro_badge">Pro 订阅</div>
+                <h2 data-i18n="pro_h">解锁全部专业功能</h2>
+                <p class="pro-sub" data-i18n="pro_sub">升级 Pro，享受无限自选股、全周期图表、无限 AI 分析及更多专属功能。</p>
+                <div class="pro-features-grid">
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_1">无限自选股</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_2">全部图表周期 (1D–1Y)</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_3">无限 AI 分析</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_4">价格提醒</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_5">数据导出</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_6">定时市场通知</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_7">AI 每日市场简报</span>
+                    </div>
+                    <div class="pro-feature-item">
+                        <span class="pro-check">✓</span>
+                        <span data-i18n="pro_8">无水印分享</span>
+                    </div>
+                </div>
+                <div class="trial-badge" data-i18n="pro_trial">🎁 &nbsp;7 天免费试用，随时取消</div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="privacy.html" data-i18n="foot_priv">隐私政策</a>
+                <a href="terms.html" data-i18n="foot_terms">服务条款</a>
+                <a href="support.html" data-i18n="foot_sup">帮助支持</a>
+                <a href="mailto:sunxuchen1991@gmail.com" data-i18n="foot_contact">联系我们</a>
+            </div>
+            <p class="footer-copy" data-i18n="foot_copy">&copy; 2025–2026 股智 StockPulse AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+    var T = {
+        zh: {
+            nav_privacy: "隐私政策",
+            nav_support: "支持",
+            nav_terms: "条款",
+            hero_title: "股智 · AI 股票分析",
+            hero_sub: "智能AI驱动的股票分析助手，实时行情、价格提醒、AI盈利洞察，助您做出更明智的投资决策。",
+            hero_dl: "App Store 下载",
+            feat_title: "核心功能",
+            feat_sub: "专为投资者打造的全功能股票分析工具",
+            f1_h: "AI 每日市场简报",
+            f1_p: "每日自动生成 AI 市场简报，总结大盘走势与个股亮点，打开 App 即可快速了解当日市场全貌。",
+            f2_h: "AI 盈利深度分析",
+            f2_p: "基于 GPT-4 对财报数据进行深度解读，从盈利质量、成长动能、运营效率、财务健康、估值合理性五大维度评分，并生成业绩概述、核心亮点、风险预警与投资建议。",
+            f3_h: "实时行情追踪",
+            f3_p: "全球股票实时行情，自选股列表配备迷你走势图与涨跌百分比，底部热门趋势板块（SPY、QQQ、NVDA 等）让您一眼掌握市场动态。",
+            f4_h: "交互式图表",
+            f4_p: "支持 1D、1W、1M、3M、6M、1Y 六档周期切换，配合关键财务数据（市盈率、市值、52周区间、股息率）全面掌握个股行情。",
+            f5_h: "财报分析三合一",
+            f5_p: "整合 Overview（EPS 历史、季度对比）、Key Metrics（P/E、P/B、ROE 等核心指标）、AI Summary（GPT-4 智能总结）三个标签页，一站式掌握财报全貌。",
+            f6_h: "价格提醒",
+            f6_p: "设定目标价，App 在后台实时监控，价格触达时立即推送通知。支持高于/低于两种触发方向，Pro 专属功能。",
+            f7_h: "实时新闻",
+            f7_p: "每只个股自动聚合最新相关新闻，配备缩略图与摘要，第一时间了解影响股价的重要动态。",
+            f8_h: "定时市场通知",
+            f8_p: "支持开市前 AI 晨报（9:30 AM）和收盘总结（4:00 PM）两档定时通知，在设置中一键开关，不错过任何重要时刻。",
+            f9_h: "数据导出",
+            f9_p: "一键导出您的自选股数据，方便在其他工具中进一步分析或存档。Pro 专属功能。",
+            f10_h: "四语言支持",
+            f10_p: "完整支持中文、英语、法语、西班牙语，随时在设置中一键切换，所有界面文字即时生效。",
+            f11_h: "深色主题",
+            f11_p: "全应用采用精心调校的深色界面，护眼舒适，图表与数据一目了然，专为长时间使用设计。",
+            pro_badge: "Pro 订阅",
+            pro_h: "解锁全部专业功能",
+            pro_sub: "升级 Pro，享受无限自选股、全周期图表、无限 AI 分析及更多专属功能。",
+            pro_1: "无限自选股",
+            pro_2: "全部图表周期 (1D–1Y)",
+            pro_3: "无限 AI 分析",
+            pro_4: "价格提醒",
+            pro_5: "数据导出",
+            pro_6: "定时市场通知",
+            pro_7: "AI 每日市场简报",
+            pro_8: "无水印分享",
+            pro_trial: "🎁 &nbsp;7 天免费试用，随时取消",
+            foot_priv: "隐私政策",
+            foot_terms: "服务条款",
+            foot_sup: "帮助支持",
+            foot_contact: "联系我们",
+            foot_copy: "&copy; 2025–2026 股智 StockPulse AI. All rights reserved."
+        },
+        en: {
+            nav_privacy: "Privacy",
+            nav_support: "Support",
+            nav_terms: "Terms",
+            hero_title: "StockPulse AI — AI Stock Analysis",
+            hero_sub: "Your AI-powered stock analysis companion with real-time quotes, price alerts, and earnings insights for smarter investing.",
+            hero_dl: "Download on App Store",
+            feat_title: "Key Features",
+            feat_sub: "A full-featured stock analysis tool built for investors",
+            f1_h: "AI Daily Market Brief",
+            f1_p: "Auto-generated AI market briefing every day — summarizes market trends and stock highlights so you get the full picture the moment you open the app.",
+            f2_h: "AI Earnings Deep Analysis",
+            f2_p: "Powered by GPT-4, analyzes earnings across five dimensions: Profit Quality, Growth Momentum, Operational Efficiency, Financial Health, and Valuation Fairness — with performance overview, highlights, risk warnings, and investment advice.",
+            f3_h: "Real-Time Quotes",
+            f3_p: "Live global stock quotes with sparkline charts and percentage changes on every watchlist row. Trending section at the bottom (SPY, QQQ, NVDA, etc.) keeps you in touch with the broader market.",
+            f4_h: "Interactive Charts",
+            f4_p: "Six chart periods (1D, 1W, 1M, 3M, 6M, 1Y) with key metrics — P/E ratio, market cap, 52-week range, and dividend yield — all in one view.",
+            f5_h: "3-in-1 Earnings Analysis",
+            f5_p: "Three tabs in one view: Overview (EPS history, quarterly comparison), Key Metrics (P/E, P/B, ROE, and more), and AI Summary (GPT-4 intelligent insights) — your one-stop earnings dashboard.",
+            f6_h: "Price Alerts",
+            f6_p: "Set target prices and get instant push notifications when they're hit. Supports above and below triggers. Pro feature.",
+            f7_h: "Live News Feed",
+            f7_p: "Per-stock news automatically aggregated with thumbnails and summaries so you never miss a market-moving headline.",
+            f8_h: "Scheduled Market Notifications",
+            f8_p: "Pre-market AI briefing (9:30 AM) and market close summary (4:00 PM) — toggle on/off in Settings so you never miss a key market moment.",
+            f9_h: "Data Export",
+            f9_p: "Export your watchlist data with one tap for further analysis in external tools. Pro feature.",
+            f10_h: "4-Language UI",
+            f10_p: "Full support for Chinese, English, French, and Spanish. Switch instantly in Settings — all UI text updates live.",
+            f11_h: "Dark Theme",
+            f11_p: "A carefully crafted dark UI throughout — easy on the eyes for extended sessions, with charts and data that stay crisp.",
+            pro_badge: "Pro Subscription",
+            pro_h: "Unlock Everything",
+            pro_sub: "Upgrade to Pro for unlimited watchlist stocks, all chart periods, unlimited AI analysis, and more.",
+            pro_1: "Unlimited Watchlist",
+            pro_2: "All Chart Periods (1D–1Y)",
+            pro_3: "Unlimited AI Analysis",
+            pro_4: "Price Alerts",
+            pro_5: "Data Export",
+            pro_6: "Scheduled Notifications",
+            pro_7: "AI Daily Market Brief",
+            pro_8: "No-Watermark Sharing",
+            pro_trial: "🎁 &nbsp;7-Day Free Trial — Cancel Anytime",
+            foot_priv: "Privacy Policy",
+            foot_terms: "Terms of Service",
+            foot_sup: "Support",
+            foot_contact: "Contact Us",
+            foot_copy: "&copy; 2025–2026 StockPulse AI. All rights reserved."
+        },
+        es: {
+            nav_privacy: "Privacidad",
+            nav_support: "Soporte",
+            nav_terms: "Términos",
+            hero_title: "StockPulse AI — Análisis Bursátil con IA",
+            hero_sub: "Tu asistente inteligente de análisis bursátil con cotizaciones en tiempo real, alertas de precios e informes de ganancias para invertir con más inteligencia.",
+            hero_dl: "Descargar en App Store",
+            feat_title: "Características Principales",
+            feat_sub: "Una herramienta completa de análisis bursátil diseñada para inversores",
+            f1_h: "Resumen Diario del Mercado con IA",
+            f1_p: "Resumen diario generado por IA que sintetiza las tendencias del mercado y los aspectos destacados de las acciones — la vista completa del mercado al abrir la app.",
+            f2_h: "Análisis Profundo de Ganancias con IA",
+            f2_p: "Impulsado por GPT-4, analiza las ganancias en cinco dimensiones: Calidad de Beneficios, Impulso de Crecimiento, Eficiencia Operativa, Salud Financiera y Equidad de Valoración — con resumen de rendimiento, aspectos clave, alertas de riesgo y consejos de inversión.",
+            f3_h: "Cotizaciones en Tiempo Real",
+            f3_p: "Cotizaciones globales en vivo con gráficos sparkline y cambios porcentuales. Sección de tendencias (SPY, QQQ, NVDA, etc.) para mantenerte al día con el mercado general.",
+            f4_h: "Gráficos Interactivos",
+            f4_p: "Seis períodos gráficos (1D, 1S, 1M, 3M, 6M, 1A) con métricas clave: ratio P/E, capitalización de mercado, rango de 52 semanas y rentabilidad por dividendo.",
+            f5_h: "Análisis de Ganancias 3 en 1",
+            f5_p: "Tres pestañas en una vista: Overview (historial EPS, comparación trimestral), Key Metrics (P/E, P/B, ROE y más) y AI Summary (análisis inteligente GPT-4) — tu panel de ganancias todo en uno.",
+            f6_h: "Alertas de Precio",
+            f6_p: "Establece precios objetivo y recibe notificaciones instantáneas cuando se alcancen. Compatible con disparadores por encima y por debajo del precio. Función Pro.",
+            f7_h: "Noticias en Tiempo Real",
+            f7_p: "Noticias por acción agregadas automáticamente con miniaturas y resúmenes para que nunca te pierdas un titular que mueva el mercado.",
+            f8_h: "Notificaciones Programadas",
+            f8_p: "Informe matutino de IA (9:30 AM) y resumen de cierre de mercado (4:00 PM) — actívalas o desactívalas en Ajustes para no perderte ningún momento clave.",
+            f9_h: "Exportación de Datos",
+            f9_p: "Exporta tu lista de seguimiento con un toque para análisis adicional en herramientas externas. Función Pro.",
+            f10_h: "Interfaz en 4 Idiomas",
+            f10_p: "Soporte completo para chino, inglés, francés y español. Cambia instantáneamente en Ajustes — todo el texto se actualiza al momento.",
+            f11_h: "Tema Oscuro",
+            f11_p: "Una interfaz oscura cuidadosamente diseñada — agradable a la vista en sesiones largas, con gráficos y datos que permanecen nítidos.",
+            pro_badge: "Suscripción Pro",
+            pro_h: "Desbloquea Todo",
+            pro_sub: "Actualiza a Pro para acciones ilimitadas, todos los períodos gráficos, análisis IA ilimitado y mucho más.",
+            pro_1: "Lista de Seguimiento Ilimitada",
+            pro_2: "Todos los Períodos Gráficos (1D–1A)",
+            pro_3: "Análisis IA Ilimitado",
+            pro_4: "Alertas de Precio",
+            pro_5: "Exportación de Datos",
+            pro_6: "Notificaciones Programadas",
+            pro_7: "Resumen Diario del Mercado con IA",
+            pro_8: "Compartir sin Marca de Agua",
+            pro_trial: "🎁 &nbsp;Prueba Gratuita de 7 Días — Cancela cuando quieras",
+            foot_priv: "Política de Privacidad",
+            foot_terms: "Términos de Servicio",
+            foot_sup: "Soporte",
+            foot_contact: "Contáctanos",
+            foot_copy: "&copy; 2025–2026 StockPulse AI. Todos los derechos reservados."
+        },
+        fr: {
+            nav_privacy: "Confidentialité",
+            nav_support: "Support",
+            nav_terms: "Conditions",
+            hero_title: "StockPulse AI — Analyse Boursière par IA",
+            hero_sub: "Votre assistant intelligent d'analyse boursière avec cotations en temps réel, alertes de prix et analyse des bénéfices pour investir plus intelligemment.",
+            hero_dl: "Télécharger sur l'App Store",
+            feat_title: "Fonctionnalités Clés",
+            feat_sub: "Un outil d'analyse boursière complet conçu pour les investisseurs",
+            f1_h: "Résumé Quotidien du Marché par IA",
+            f1_p: "Résumé quotidien généré par IA — synthétise les tendances du marché et les faits marquants des actions pour un aperçu complet dès l'ouverture de l'app.",
+            f2_h: "Analyse Approfondie des Bénéfices par IA",
+            f2_p: "Propulsé par GPT-4, analyse les bénéfices selon cinq dimensions : Qualité des Bénéfices, Dynamique de Croissance, Efficacité Opérationnelle, Santé Financière et Équité de Valorisation — avec un aperçu des performances, les points clés, les alertes de risque et des conseils d'investissement.",
+            f3_h: "Cotations en Temps Réel",
+            f3_p: "Cotations mondiales en direct avec graphiques sparkline et variations en pourcentage. Section Tendances (SPY, QQQ, NVDA, etc.) pour rester en phase avec le marché global.",
+            f4_h: "Graphiques Interactifs",
+            f4_p: "Six périodes graphiques (1J, 1S, 1M, 3M, 6M, 1A) avec métriques clés : ratio C/B, capitalisation boursière, plage sur 52 semaines et rendement du dividende.",
+            f5_h: "Analyse des Résultats 3 en 1",
+            f5_p: "Trois onglets en une vue : Overview (historique EPS, comparaison trimestrielle), Key Metrics (C/B, P/B, ROE et plus) et AI Summary (analyse intelligente GPT-4) — votre tableau de bord des résultats tout-en-un.",
+            f6_h: "Alertes de Prix",
+            f6_p: "Définissez des prix cibles et recevez des notifications instantanées lorsqu'ils sont atteints. Prend en charge les déclencheurs au-dessus et en dessous du prix. Fonction Pro.",
+            f7_h: "Actualités en Temps Réel",
+            f7_p: "Actualités par action agrégées automatiquement avec miniatures et résumés — ne manquez jamais un titre qui fait bouger le marché.",
+            f8_h: "Notifications Programmées",
+            f8_p: "Briefing matinal IA (9h30) et résumé de clôture du marché (16h00) — activez/désactivez dans les Réglages pour ne manquer aucun moment clé.",
+            f9_h: "Export des Données",
+            f9_p: "Exportez votre liste de suivi en un tap pour une analyse approfondie dans des outils externes. Fonction Pro.",
+            f10_h: "Interface en 4 Langues",
+            f10_p: "Support complet du chinois, anglais, français et espagnol. Changez instantanément dans les Réglages — tout le texte se met à jour en direct.",
+            f11_h: "Thème Sombre",
+            f11_p: "Une interface sombre soigneusement conçue — agréable pour de longues sessions, avec des graphiques et données qui restent nets.",
+            pro_badge: "Abonnement Pro",
+            pro_h: "Débloquez Tout",
+            pro_sub: "Passez à Pro pour une liste illimitée, toutes les périodes graphiques, l'analyse IA illimitée et bien plus encore.",
+            pro_1: "Liste de Suivi Illimitée",
+            pro_2: "Toutes les Périodes Graphiques (1J–1A)",
+            pro_3: "Analyse IA Illimitée",
+            pro_4: "Alertes de Prix",
+            pro_5: "Export des Données",
+            pro_6: "Notifications Programmées",
+            pro_7: "Résumé Quotidien du Marché par IA",
+            pro_8: "Partage sans Filigrane",
+            pro_trial: "🎁 &nbsp;Essai Gratuit de 7 Jours — Annulez à tout moment",
+            foot_priv: "Politique de Confidentialité",
+            foot_terms: "Conditions d'Utilisation",
+            foot_sup: "Support",
+            foot_contact: "Nous Contacter",
+            foot_copy: "&copy; 2025–2026 StockPulse AI. Tous droits réservés."
+        }
+    };
+
+    function setLang(lang) {
+        localStorage.setItem('sa-lang', lang);
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (T[lang] && T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+        });
+        document.querySelectorAll('.ls-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+    }
+
+    setLang(localStorage.getItem('sa-lang') || 'zh');
+    </script>
+</body>
+</html>
